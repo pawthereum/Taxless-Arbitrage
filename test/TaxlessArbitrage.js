@@ -176,7 +176,7 @@ describe("Taxless Arbitrage contract", function () {
   })
 
   describe("Sells tokens and receives eth", function () {
-    it("Should allow authorized accounts to swap taxlessly", async function () {
+    it("Should ensure authorized accounts sell tokens and receive eth on taxless swaps", async function () {
       // make sure the swapper sells tokens after the swap
       const approvedSwapperBalanceBefore = await pawthereum.balanceOf(approvedSwapper.address);
       // make sure the swapper receives eth after the swap
