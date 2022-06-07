@@ -127,6 +127,13 @@ describe("Taxless Arbitrage contract", function () {
       await taxlessArb.setApprovedSwapper(approvedSwapper.address, false);
       await expect(await taxlessArb.approvedSwappers(approvedSwapper.address)).to.equal(false)
     });
+
+    it("Should not allow a non-owner to add new authorized accounts", async function () {
+      await expect(
+        taxlessArb.connect(notApprovedSwapper)
+        .setApprovedSwapper(notApprovedSwapper.address, true)
+      ).to.be.revertedWith("Ownable: caller is not the owner")
+    });
   });
 
   describe("Taxless swaps", function () {
