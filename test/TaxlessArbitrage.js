@@ -117,6 +117,16 @@ describe("Taxless Arbitrage contract", function () {
       ))
       .to.not.be.reverted
     });
+
+    it("Should allow the owner to add new authorized accounts", async function () {
+      await taxlessArb.setApprovedSwapper(notApprovedSwapper.address, true);
+      await expect(await taxlessArb.approvedSwappers(notApprovedSwapper.address)).to.equal(true)
+    });
+
+    it("Should allow the owner to remove existing authorized accounts", async function () {
+      await taxlessArb.setApprovedSwapper(approvedSwapper.address, false);
+      await expect(await taxlessArb.approvedSwappers(approvedSwapper.address)).to.equal(false)
+    });
   });
 
   describe("Taxless swaps", function () {
